@@ -1,5 +1,3 @@
-@import "./../../../dist/scss/variables.scss";
-
 .loadingSpinnerContainer {
     position: fixed;
     top: 0;
@@ -20,4 +18,4 @@
       border-radius: 50%;
       animation: spin 1.2s linear infinite;
     }
-  }
+}

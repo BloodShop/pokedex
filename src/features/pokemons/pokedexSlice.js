@@ -26,7 +26,7 @@ export const getPokemons = createAsyncThunk(
     }
 );
 
-export const pokemonSlice = createSlice({
+export const pokedexSlice = createSlice({
     name: 'pokemons',
     initialState,
     reducers: {
@@ -46,7 +46,7 @@ export const pokemonSlice = createSlice({
         .addCase(getPokemons.fulfilled, (state, action) => {
           state.isLoading = false
           state.isSuccess = true
-          state.exams = action.payload
+          state.pokemons = action.payload
         })
         .addCase(getPokemons.rejected, (state, action) => {
           state.isLoading = false
@@ -56,5 +56,5 @@ export const pokemonSlice = createSlice({
     },
   })
 
-  export const { reset } = pokemonSlice.actions;
-  export default pokemonSlice.reducer;
+  export const { reset } = pokedexSlice.actions;
+  export default pokedexSlice.reducer;

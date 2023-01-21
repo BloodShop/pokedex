@@ -4,7 +4,7 @@ import pokedexReducer from '../features/pokemons/pokedexSlice';
 
 export const store = configureStore({
   reducer: {
+    pokedex: pokedexReducer,
     pokemon: singlePokeReducer,
-    pokedex: pokedexReducer
   },
 });

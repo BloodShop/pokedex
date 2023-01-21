@@ -1,0 +1,17 @@
+.sidebar {
+    float: 0;
+    height: 100vh;
+    display: block;
+    width: 208px;
+    padding-top: $header-height;
+    background-color:#D2D2D2;
+    margin-left:initial;
+    position: fixed; //remove it
+
+    &__content {
+        margin: $header-height / 2;
+        display: flex;
+        justify-content: center; /* center flex items horizontally, in this case */
+        align-items: center; /* center flex items vertically, in this case */
+    }
+}

@@ -1,17 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Spinner from "../components/spinner/Spinner";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import PokemonItem from "../components/PokemonItem";
+import Sidebar from "../components/Sidebar";
+import Spinner from "../components/Spinner";
 import { getPokemons, reset } from "../features/pokemons/pokedexSlice";
 
 export default function Pokedex() {
-    const { pokemons, isLoading, isError, message } = useSelector(
-            (state) => state.Pokedex
+    const dispatch = useDispatch(),
+        { isLoading, isError, message, pokemons } = useSelector(
+            (state) => state.pokedex
         ),
-        dispatch = useDispatch();
+        [query, setQuery] = useState(""),
+        location = useLocation(),
+        navigate = useNavigate(),
+        [selectedPokemon, setSelectedPokemon] = useState();
 
     useEffect(() => {
         if (isError) {
             console.log(message);
+        }
+
+        if (selectedPokemon) {
+            navigate(`${selectedPokemon.id}`, {
+                state: { pokemon: selectedPokemon },
+            });
         }
 
         dispatch(getPokemons());
@@ -19,13 +32,41 @@ export default function Pokedex() {
         return () => {
             dispatch(reset());
         };
-    }, [isError, message, dispatch]);
+    }, [selectedPokemon, isError, message, dispatch]);
 
     if (isLoading) {
         return <Spinner />;
     }
 
-    console.log(pokemons);
-
-    return <div>Pokedex</div>;
+    return (
+        <>
+            <div className="main">
+                <Sidebar setQuery={setQuery} />
+                <div className={"card-container"}>
+                    {pokemons.length > 0 ? (
+                        pokemons
+                            .filter((pokemon) =>
+                                query === ""
+                                    ? pokemon
+                                    : pokemon.name
+                                          .toLowerCase()
+                                          .includes(query.toLowerCase())
+                                    ? pokemon
+                                    : ""
+                            )
+                            .map((pokemon) => (
+                                <PokemonItem
+                                    onClick={() => setSelectedPokemon(pokemon)}
+                                    key={pokemon.id}
+                                    pokemon={pokemon}
+                                />
+                            ))
+                    ) : (
+                        <h3>You have no pokemons</h3>
+                    )}
+                </div>
+            </div>
+            {selectedPokemon && <Outlet key={location.pathname} />}
+        </>
+    );
 }

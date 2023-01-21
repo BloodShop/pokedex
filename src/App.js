@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Header from './components/header/Header';
-import Spinner from './components/spinner/Spinner';
+import Header from './components/Header';
+import Spinner from './components/Spinner';
 import Pokedex from './pages/Pokedex';
 import Pokemon from './pages/Pokemon';
 const LazyAbout = React.lazy(() => import('./pages/About'));
