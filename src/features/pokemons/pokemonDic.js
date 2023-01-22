@@ -1,13 +1,65 @@
+function addEvolutions(pokemonList) {
+    const evolutionArrays = []
+
+    const getEvolutionChain = (pokemon, evolutionChain = []) => {
+        evolutionChain.push(pokemon);
+        if (pokemon?.evolutions.length === 0) {
+            return evolutionChain;
+        }
+        for (let i = 0; i < pokemon?.evolutions.length; i++) {
+            const nextPokemon = pokemonList.find(p => p.id === pokemon.evolutions[i].id);
+            getEvolutionChain(nextPokemon, evolutionChain);
+        }
+        return evolutionChain;
+    }
+
+    for (let poke of pokemonList) {
+        console.log(poke);
+
+        evolutionArrays.push(getEvolutionChain(poke));
+    }
+
+    console.log(evolutionArrays);
+    debugger
+}
+
+
+ function createEvolutionChains(pokemonList) {
+    let evolutionChains = [];
+
+    function findChain(pokemon, chain = []) {
+        debugger
+        chain.push(pokemon);
+        if (!pokemon.evolutions?.length === 0) {
+            evolutionChains.push(chain);
+        } else {
+            pokemon.evolutions?.forEach(evolution => findChain(pokemonList[evolution.id], [...chain]));
+        }
+    }
+
+    pokemonList.forEach(pokemon => findChain(pokemon));
+    debugger
+    return evolutionChains;
+}
+
+
 const pokemonDictionary = (pokemons) => {
     let evolutionDictionary = {};
 
-    pokemons.forEach(pokemon => {
-        evolutionDictionary[pokemon.id] = [{ name: pokemon.name }];
+    pokemons.forEach((pokemon, index) => {
+        evolutionDictionary[pokemon.id] = [{ ...pokemon }];
         if (pokemon.evolutions) {
             evolutionDictionary[pokemon.id].push();
+            const tempArr = []
             pokemon.evolutions.forEach(evolution => {
-                evolutionDictionary[pokemon.id].push({ [evolution.id]: evolution.name });
+                const temp = { ...pokemons.find(p => p.id === evolution.id) };
+                if (!temp) {
+                    temp = { [evolution.id]: evolution.name }
+                }
+                tempArr.push(temp);
             });
+            if (tempArr.length > 0)
+                evolutionDictionary[pokemon.id].push(tempArr);
         }
     });
     console.log(evolutionDictionary);
