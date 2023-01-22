@@ -7,6 +7,7 @@ const initialState = {
     isLoading: false,
     message: '',
     pokemons: [],
+    pokemon: null
 }
 
 export const getPokemons = createAsyncThunk(
@@ -26,6 +27,24 @@ export const getPokemons = createAsyncThunk(
     }
 );
 
+// Get pokemon by id
+export const getPokemonById = createAsyncThunk(
+  'pokemons/getById',
+  async (id, thunkAPI) => {
+      try {
+          return await pokedexService.getPokemonById(id);
+      } catch (error) {
+          const message =
+              (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+              error.message ||
+              error.toString();
+          return thunkAPI.rejectWithValue(message);
+      }
+  }
+);
+
 export const pokedexSlice = createSlice({
     name: 'pokemons',
     initialState,
@@ -36,6 +55,7 @@ export const pokedexSlice = createSlice({
         state.isError = false
         state.message = ''
         state.pokemons = []
+        state.pokemon = null
       },
     },
     extraReducers: (builder) => {
@@ -49,6 +69,21 @@ export const pokedexSlice = createSlice({
           state.pokemons = action.payload
         })
         .addCase(getPokemons.rejected, (state, action) => {
+          state.isLoading = false
+          state.isError = true
+          state.message = action.payload
+        })
+        .addCase(getPokemonById.pending, (state) => {
+          if(!state.isLoading)
+            state.isLoading = true
+        })
+        .addCase(getPokemonById.fulfilled, (state, action) => {
+          if(state.isLoading)
+            state.isLoading = false
+          state.isSuccess = true
+          state.pokemon = action.payload
+        })
+        .addCase(getPokemonById.rejected, (state, action) => {
           state.isLoading = false
           state.isError = true
           state.message = action.payload

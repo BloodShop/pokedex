@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "../css/styles.css";
+import pokemonTypes from "../features/pokemons/pokemonTypes";
 
-export default function Sidebar({ setQuery }) {
+export default function Sidebar({ onTypeCheck, setQuery }) {
     return (
         <div className="sidebar">
             <div className="sidebar__content">
@@ -12,41 +13,21 @@ export default function Sidebar({ setQuery }) {
                         onChange={(event) => setQuery(event.target.value)}
                     />
                 </label>
-                {/* <div>
-                    <span className="">Pokédex</span>
+                <div className="">
+                    {pokemonTypes &&
+                        pokemonTypes.map((type, index) => (
+                            <div className="sidebar__content__type" key={type}>
+                                <label>
+                                    <input
+                                        name={type}
+                                        type="checkbox"
+                                        onChange={onTypeCheck}
+                                    />
+                                    {type}
+                                </label>
+                            </div>
+                        ))}
                 </div>
-                <div>
-                    <nav
-                        className={`${styles.nav} ${
-                            menuOpen ? styles[`nav--open`] : {}
-                        }`}
-                    >
-                        <a className={styles.nav__item} href={"/"}>
-                            Inventory
-                        </a>
-                        <a className={styles.nav__item} href={"about"}>
-                            Lazy About
-                        </a>
-                        <div className={styles.nav__button__container}>
-                            <Button />
-                        </div>
-                    </nav>
-                </div>
-                <div>
-                    <div className={styles.header__button__container}>
-                        <Button />
-                    </div>
-                    <button
-                        className={styles.header__toggler}
-                        onClick={menuToggler}
-                    >
-                        {!menuOpen ? (
-                            <BiMenuAltRight />
-                        ) : (
-                            <AiOutlineCloseSquare />
-                        )}
-                    </button>
-                </div> */}
             </div>
         </div>
     );

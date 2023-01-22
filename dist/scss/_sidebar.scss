@@ -1,17 +1,31 @@
 .sidebar {
-    float: 0;
+    padding: ($header-height + 20px) 20px 0 20px;
     height: 100vh;
-    display: block;
-    width: 208px;
-    padding-top: $header-height;
-    background-color:#D2D2D2;
-    margin-left:initial;
-    position: fixed; //remove it
-
-    &__content {
-        margin: $header-height / 2;
-        display: flex;
-        justify-content: center; /* center flex items horizontally, in this case */
-        align-items: center; /* center flex items vertically, in this case */
+    width: $sidebar-width;
+    float: left;
+    background-color: #f2f2f2;
+    position: fixed;
+    .sidebar__content {
+        label {
+            display: block;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .sidebar__content__type {
+            margin-bottom: 10px;
+            label {
+                display: block;
+                font-size: 18px;
+                input[type="checkbox"] {
+                    margin-right: 5px;
+                }
+            }
+        }
     }
 }

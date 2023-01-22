@@ -3,10 +3,10 @@ import "../css/styles.css";
 
 import { BiMenuAltRight } from "react-icons/bi";
 import { AiOutlineCloseSquare } from "react-icons/ai";
+import { useLocation } from "react-router-dom";
 
 const Header = () => {
-    const [menuOpen, setMenuOpen] = useState(false);
-    const menuToggler = () => setMenuOpen((p) => !p);
+    const location = useLocation();
 
     return (
         <div className={"header"}>
@@ -15,29 +15,38 @@ const Header = () => {
                     <span className={"logo"}>Pokédex</span>
                 </div>
                 <div>
-                    <nav className={`nav ${menuOpen ? "nav--open" : {}}`}>
-                        <a className={"nav__item"} href={"/"}>
+                    <nav className={`nav nav--open`}>
+                        <a
+                            className={`nav__item ${
+                                location.pathname === "/"
+                                    ? "nav__item--disabled"
+                                    : ""
+                            }`}
+                            onClick={(e) =>
+                                location.pathname === "/" && e.preventDefault()
+                            }
+                            href={"/"}
+                        >
                             Inventory
                         </a>
-                        <a className={"nav__item"} href={"about"}>
+                        <a
+                            className={`nav__item ${
+                                location.pathname === "/about"
+                                    ? "nav__item--disabled"
+                                    : ""
+                            }`}
+                            onClick={(e) =>
+                                location.pathname === "/about" &&
+                                e.preventDefault()
+                            }
+                            href={"about"}
+                        >
                             Lazy About
                         </a>
                         <div className={"nav__button__container"}>
                             <Button />
                         </div>
                     </nav>
-                </div>
-                <div>
-                    <div className={"header__button__container"}>
-                        <Button />
-                    </div>
-                    <button className={"header__toggler"} onClick={menuToggler}>
-                        {!menuOpen ? (
-                            <BiMenuAltRight />
-                        ) : (
-                            <AiOutlineCloseSquare />
-                        )}
-                    </button>
                 </div>
             </div>
         </div>

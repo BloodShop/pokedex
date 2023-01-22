@@ -80,6 +80,12 @@
         right: 0;
     }
 
+    &--disabled {
+        pointer-events: none;
+        color: #ccc;
+        text-decoration: line-through;
+    }
+
     &__item {
         display: block;
         padding: $spacing-md;
