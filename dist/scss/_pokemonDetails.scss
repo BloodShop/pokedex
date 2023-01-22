@@ -57,30 +57,31 @@
             flex-wrap: wrap;
             margin: 0;
             padding: 0;
-            .arrow__right {
-                &::before {
-                    content: "";
-                    border-top: 5px solid transparent;
-                    border-bottom: 5px solid transparent;
-                    border-left: 5px solid black;
-                    display: inline-block;
-                    position: absolute;
-                    margin: 20px (-$evolution-circle-radius);
-                }
-            }
+
             li {
                 font-size: 18px;
                 color: $header-font-color;
                 margin: 10px 10px;
-                padding: 15px;
+                display: inline-block;
+                padding-top: 20px;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                overflow:hidden;
+
+                span {
+                    display: flex;
+                    text-align: center;
+                }
             }
             .circle {
+                @extend li;
                 border: 2px solid black;
+                font-size: 18px;
                 background-color: $primary;
                 height: $evolution-circle-radius * 2;
-                border-radius:50%;
+                border-radius: 50%;
                 width: $evolution-circle-radius * 2;
-                font-size: 15px;
                 font-weight: 700;
                 cursor: pointer;
                 &__current {
@@ -89,7 +90,6 @@
                     pointer-events: none;
                 }
             }
-
         }
     }
 }

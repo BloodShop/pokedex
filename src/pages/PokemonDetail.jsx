@@ -70,7 +70,9 @@ export default function PokemonDetail() {
                                 return (
                                     <div key={id}>
                                         {index !== 0 && (
-                                            <div className="arrow__right"></div>
+                                            <li>
+                                                <span>&#8594;</span>
+                                            </li>
                                         )}
                                         <li
                                             onClick={(e) => {

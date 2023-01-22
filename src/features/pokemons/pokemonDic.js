@@ -11,7 +11,7 @@ const pokemonDictionary = (pokemons) => {
         }
     });
     console.log(evolutionDictionary);
-
+    debugger
 
     let evolutionArrays = createEvolutionsArray(evolutionDictionary);
     console.log(evolutionArrays);
