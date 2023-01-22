@@ -1,23 +1,14 @@
 import React, { useEffect, useState } from "react";
-import "../css/styles.css";
 import { useLocation } from "react-router-dom";
-import Clock from "./Clock";
 import { BiMenuAltRight } from "react-icons/bi";
 import { AiOutlineCloseSquare } from "react-icons/ai";
+import Clock from "./Clock";
+import "../css/styles.css";
 
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false),
         menuToggler = () => setMenuOpen((p) => !p),
-        location = useLocation(),
-        [time, setTime] = useState(new Date().toLocaleTimeString());
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setTime(new Date().toLocaleTimeString());
-        }, 1000);
-
-        return () => clearInterval(interval);
-    }, []);
+        location = useLocation();
 
     return (
         <div className={"header"}>

@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default function Checkbox({ id, title, name, handleChange, checked }) {
+export default function Checkbox({ title, name, handleChange, checked }) {
     return (
         <div>
             <label>

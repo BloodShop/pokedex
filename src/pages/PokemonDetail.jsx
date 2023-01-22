@@ -10,6 +10,7 @@ import NoMatch from "./NoMatch";
 export default function PokemonDetail() {
     const { state } = useLocation(),
         params = useParams(),
+        location = useLocation(),
         navigate = useNavigate(),
         dispatch = useDispatch(),
         [pokemon, setPokemon] = useState(),
@@ -72,14 +73,16 @@ export default function PokemonDetail() {
                                             <div className="arrow__right"></div>
                                         )}
                                         <li
-                                            onClick={() =>
-                                                navigate(`/${id}`, {
-                                                    state: {
-                                                        evolutionChain:
-                                                            state.evolutionChain,
-                                                    },
-                                                })
-                                            }
+                                            onClick={(e) => {
+                                                location.pathname === `/${id}`
+                                                    ? e.preventDefault()
+                                                    : navigate(`/${id}`, {
+                                                          state: {
+                                                              evolutionChain:
+                                                                  state.evolutionChain,
+                                                          },
+                                                      });
+                                            }}
                                             className={`circle${
                                                 id === pokemon.id
                                                     ? "__current"

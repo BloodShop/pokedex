@@ -10,12 +10,12 @@ export default function Sidebar({ onTypeCheck, setQuery }) {
                     <input
                         type="text"
                         placeholder="Search..."
-                        onChange={(event) => setQuery(event.target.value)}
+                        onChange={(e) => setQuery(e.target.value)}
                     />
                 </label>
                 <div className="">
                     {pokemonTypes &&
-                        pokemonTypes.map((type, index) => (
+                        pokemonTypes.map((type) => (
                             <div className="sidebar__content__type" key={type}>
                                 <label>
                                     <input

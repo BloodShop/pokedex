@@ -59,8 +59,6 @@ export default function Pokedex() {
             query === ""
                 ? pokemon
                 : pokemon.name.toLowerCase().includes(query.toLowerCase())
-                ? pokemon
-                : ""
         );
     };
 
