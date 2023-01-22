@@ -60,7 +60,9 @@ export default function PokemonDetail() {
                 <h3>Evolutions:</h3>
                 <ul>
                     {pokemon.evolutions.map((evolution, index) => (
-                        <li key={index}>{evolution.name}</li>
+                        <li className="circle" key={index}>
+                            {evolution.name}
+                        </li>
                     ))}
                 </ul>
             </div>

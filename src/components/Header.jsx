@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../css/styles.css";
-
-import { BiMenuAltRight } from "react-icons/bi";
-import { AiOutlineCloseSquare } from "react-icons/ai";
 import { useLocation } from "react-router-dom";
+import Button from "./Button";
 
-const Header = () => {
-    const location = useLocation();
+export default function Header() {
+    const [menuOpen, setMenuOpen] = useState(false),
+        location = useLocation(),
+        [time, setTime] = useState(new Date().toLocaleTimeString());
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTime(new Date().toLocaleTimeString());
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <div className={"header"}>
@@ -15,7 +23,7 @@ const Header = () => {
                     <span className={"logo"}>Pokédex</span>
                 </div>
                 <div>
-                    <nav className={`nav nav--open`}>
+                    <nav className={`nav ${menuOpen ? "nav--open" : {}}`}>
                         <a
                             className={`nav__item ${
                                 location.pathname === "/"
@@ -43,6 +51,7 @@ const Header = () => {
                         >
                             Lazy About
                         </a>
+                        <div className="nav__item">{time}</div>
                         <div className={"nav__button__container"}>
                             <Button />
                         </div>
@@ -51,10 +60,4 @@ const Header = () => {
             </div>
         </div>
     );
-};
-
-const Button = () => {
-    return <button className={"button"}>Click me</button>;
-};
-
-export default Header;
+}

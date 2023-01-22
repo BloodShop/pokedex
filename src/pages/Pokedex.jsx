@@ -13,7 +13,6 @@ export default function Pokedex() {
             (state) => state.pokedex
         ),
         [query, setQuery] = useState(""),
-        location = useLocation(),
         navigate = useNavigate(),
         [selectedPokemon, setSelectedPokemon] = useState(),
         [types, setTypes] = useState(
@@ -74,7 +73,7 @@ export default function Pokedex() {
 
     return (
         <>
-            <div>
+            <div className="main__intro">
                 <Sidebar onTypeCheck={handleTypeChange} setQuery={setQuery} />
                 <div className={"card-container"}>
                     {pokemons.length > 0 ? (

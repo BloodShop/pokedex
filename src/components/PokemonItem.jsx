@@ -12,6 +12,17 @@ export default function PokemonItem({ pokemon, onClick }) {
                 className="c-card__image"
                 effect="blur"
             />
+            <div className="c-card__description">
+                {pokemon.description.substring(0, 100)}...
+            </div>
+            <div className="c-card__types">
+                <h3>Types:</h3>
+                <ul>
+                    {pokemon.types.map((type, index) => (
+                        <li key={index}>{type}</li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 }
