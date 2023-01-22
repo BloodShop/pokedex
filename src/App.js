@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Spinner from './components/Spinner';
+import NoMatch from './pages/NoMatch';
 import Pokedex from './pages/Pokedex';
 import PokemonDetail from './pages/PokemonDetail';
 const LazyAbout = React.lazy(() => import('./pages/About'));
@@ -29,6 +30,8 @@ export default function App() {
                 <LazyAbout />
               </React.Suspense>
             } />
+
+        <Route path='*' element={<NoMatch />} />
       </Routes>
     </div>
   );

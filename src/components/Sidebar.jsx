@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "../css/styles.css";
 import pokemonTypes from "../features/pokemons/pokemonTypes";
 

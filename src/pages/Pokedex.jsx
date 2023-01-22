@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PokemonItem from "../components/PokemonItem";
 import Sidebar from "../components/Sidebar";
 import Spinner from "../components/Spinner";
 import { getPokemons, reset } from "../features/pokemons/pokedexSlice";
+import pokemonEvolutionary from "../features/pokemons/pokemonDic";
 import pokemonTypes from "../features/pokemons/pokemonTypes";
 
 export default function Pokedex() {
@@ -17,7 +18,8 @@ export default function Pokedex() {
         [selectedPokemon, setSelectedPokemon] = useState(),
         [types, setTypes] = useState(
             pokemonTypes.reduce((acc, type) => ({ ...acc, [type]: false }), {})
-        );
+        ),
+        [pokemonGraphEvolution, setPokemonGraphEvolution] = useState(null);
 
     useEffect(() => {
         if (isError) {
@@ -26,11 +28,18 @@ export default function Pokedex() {
 
         if (selectedPokemon) {
             navigate(`${selectedPokemon.id}`, {
-                state: { pokemon: selectedPokemon },
+                state: {
+                    pokemon: selectedPokemon,
+                    evolutionChain: pokemonGraphEvolution.find((ev) =>
+                        ev.some((obj) => obj.hasOwnProperty(selectedPokemon.id))
+                    ),
+                },
             });
         }
 
-        dispatch(getPokemons());
+        dispatch(getPokemons()).then((res) => {
+            setPokemonGraphEvolution(pokemonEvolutionary(res.payload));
+        });
 
         return () => {
             dispatch(reset());
