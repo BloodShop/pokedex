@@ -5,7 +5,7 @@ import PokemonItem from "../components/PokemonItem";
 import Sidebar from "../components/Sidebar";
 import Spinner from "../components/Spinner";
 import { getPokemons, reset } from "../features/pokemons/pokedexSlice";
-import pokemonEvolutionary from "../features/pokemons/pokemonDic";
+import revolutionary from "../features/pokemons/revolutionary";
 import pokemonTypes from "../features/pokemons/pokemonTypes";
 
 export default function Pokedex() {
@@ -31,14 +31,21 @@ export default function Pokedex() {
                 state: {
                     pokemon: selectedPokemon,
                     evolutionChain: pokemonGraphEvolution.find((ev) =>
-                        ev.some((obj) => obj.hasOwnProperty(selectedPokemon.id))
+                        ev.some((obj) => {
+                            if (obj.id) {
+                                return obj.id === selectedPokemon.id;
+                            }
+                            return obj.some(
+                                (nestedEv) => nestedEv.id === selectedPokemon.id
+                            );
+                        })
                     ),
                 },
             });
         }
 
         dispatch(getPokemons()).then((res) => {
-            setPokemonGraphEvolution(pokemonEvolutionary(res.payload));
+            setPokemonGraphEvolution(revolutionary(res.payload));
         });
 
         return () => {
@@ -66,12 +73,11 @@ export default function Pokedex() {
         const checkedTypes = Object.entries(types)
             .filter((type) => type[1])
             .map((type) => type[0]);
-        if (checkedTypes.length > 0) {
-            return pokes.filter(({ types }) =>
-                types.some((t) => checkedTypes.includes(t))
-            );
-        }
-        return pokes;
+        return checkedTypes.length > 0
+            ? pokes.filter(({ types }) =>
+                  types.some((t) => checkedTypes.includes(t))
+              )
+            : pokes;
     };
 
     if (isLoading) {
