@@ -32,7 +32,6 @@ export default function Pokedex() {
                     pokemon: selectedPokemon,
                     evolutionChain: pokemonGraphEvolution.find((ev) =>
                         ev.some((obj) => {
-                            debugger;
                             if (obj.id) {
                                 return obj.id === selectedPokemon.id;
                             } else {

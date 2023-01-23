@@ -66,10 +66,12 @@ export default function PokemonDetail() {
                     <ul>
                         {evolutionChain &&
                             evolutionChain.map((evolution, index) => {
-                                const id = Object.keys(evolution)[0],
-                                    name = Object.values(evolution)[0];
+                                if (Array.isArray(evolution)) {
+                                    return;
+                                }
+
                                 return (
-                                    <div key={id}>
+                                    <div key={evolution.id}>
                                         {index !== 0 && (
                                             <li>
                                                 <span>&#8594;</span>
@@ -77,22 +79,26 @@ export default function PokemonDetail() {
                                         )}
                                         <li
                                             onClick={(e) => {
-                                                location.pathname === `/${id}`
+                                                location.pathname ===
+                                                `/${evolution.id}`
                                                     ? e.preventDefault()
-                                                    : navigate(`/${id}`, {
-                                                          state: {
-                                                              evolutionChain:
-                                                                  state.evolutionChain,
-                                                          },
-                                                      });
+                                                    : navigate(
+                                                          `/${evolution.id}`,
+                                                          {
+                                                              state: {
+                                                                  evolutionChain:
+                                                                      state.evolutionChain,
+                                                              },
+                                                          }
+                                                      );
                                             }}
                                             className={`circle${
-                                                id === pokemon.id
+                                                evolution.id === pokemon.id
                                                     ? "__current"
                                                     : ""
                                             }`}
                                         >
-                                            <div>{name}</div>
+                                            <div>{evolution.name}</div>
                                             <div>{index}</div>
                                         </li>
                                     </div>
