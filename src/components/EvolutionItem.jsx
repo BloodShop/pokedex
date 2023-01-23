@@ -8,7 +8,6 @@ export default function EvolutionItem({
 }) {
     return (
         <div
-            key={evolution.id}
             className={`circle${
                 evolution.id === selectedPokemon.id ? "__current" : ""
             }`}
