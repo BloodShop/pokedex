@@ -25,6 +25,5 @@ export default function revolutionary(pokemonList) {
         }
         evolution.push(tempChain);
     }
-    console.log(evolution)
     return evolution;
 }
