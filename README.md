@@ -1,124 +1,46 @@
-# Pokedex web application
+# Getting Started with Create React App and Redux
 
-The Pokedex web app provides a dashboard with a list of Pokemon to select from, along with information and images about each Pokemon. Popular among Pokemon fans. Retrieving Pokemon data and organizing them by evolutionary path can be made simple and easy with the use of a Pokedex API.
-
-|                                                      Single Pokemon                                                      |                                                  Pokedex Dashboard                                                  |
-| :----------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------: |
-| ![single_pokemon](https://user-images.githubusercontent.com/23366804/214074867-e83bc191-686c-4553-880c-eca68ce6e871.png) | ![dashboard](https://user-images.githubusercontent.com/23366804/214074725-04a1f3b6-2373-46b3-8244-c574144378f5.png) |
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template with redux-toolkit using routing, axios & sass.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-## Initialize Project - downloading dependecies
+### `npm start`
 
-```
-npm install
-npm start
-```
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-## Part of the project
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-### Searching and categorizing
+### `npm test`
 
-_Search and categorize Pokemon_ are features that allows users to search for specific Pokemon within the inventory, and also allows users to browse Pokemon by category such as grass, fire, water etc. This function would improve the usability and organization of the inventory page and allow for easier navigation and access to Pokemon information:
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### _src/featues/pokemons/pokemonTypes.js_
+### `npm run build`
 
-```javascript
-const pokemonTypes = [
-    "grass",
-    "fire",
-    "flying",
-    "water",
-    "bug",
-    "normal",
-    "electric",
-    "ground",
-    "fairy",
-    "fighting",
-    "psychic",
-    "rock",
-    "steel",
-    "ice",
-    "ghost",
-    "dragon",
-];
-```
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-### _src/pages/Pokedex.jsx_
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-```javascript
-/* Types declaration */
-[types, setTypes] = useState(pokemonTypes.reduce((acc, type) => ({ ...acc, [type]: false }), {}))
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-   ...
+### `npm run eject`
 
-const filterByQuery = (pokes) => {
-    return pokes.filter((pokemon) =>
-        query === ""
-            ? pokemon
-            : pokemon.name.toLowerCase().includes(query.toLowerCase())
-    );
-};
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-const filterByType = (pokes) => {
-    const checkedTypes = Object.entries(types)
-        .filter((type) => type[1])
-        .map((type) => type[0]);
-    return checkedTypes.length > 0
-        ? pokes.filter(({ types }) =>
-              types.some((t) => checkedTypes.includes(t))
-          )
-        : pokes;
-};
-```
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-## Pokemon Evolution
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-This function allows for a clear and streamlined view of each Pokemon's evolutionary journey, including their evolution and devolution. Additionally, it helps to better understand Pokemon's characteristics and development.
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-### _src/featues/pokemons/revolutionary.js_
+## Learn More
 
-```javascript
-export default function revolutionary(pokemonList) {
-    const pokemonsCopy = structuredClone(pokemonList),
-        evolution = [];
-    for (let i = 0; i < pokemonsCopy.length; i++) {
-        pokemonsCopy[i].evolutions = pokemonsCopy[i].evolutions.map((e) => {
-            const pokeIndex = pokemonsCopy.findIndex((p) => p.id === e.id);
-            if (pokeIndex !== -1) {
-                pokemonsCopy[pokeIndex].devolution = pokemonsCopy[i];
-                return pokemonsCopy[pokeIndex];
-            }
-            return { ...e, devolution: pokemonsCopy[i] };
-        });
-    }
-
-    const filteredPokes = pokemonsCopy.filter((p) => !p.devolution);
-    for (let i = 0; i < filteredPokes.length; i++) {
-        const tempChain = [filteredPokes[i]];
-        let tempEvolutions = filteredPokes[i].evolutions;
-        while (tempEvolutions && tempEvolutions.length > 0) {
-            if (tempEvolutions.length === 1) {
-                tempChain.push(structuredClone(tempEvolutions[0]));
-            } else {
-                tempChain.push(structuredClone(tempEvolutions));
-            }
-            tempEvolutions = tempEvolutions.find(
-                (e) => e.evolutions
-            )?.evolutions;
-        }
-        evolution.push(tempChain);
-    }
-    return evolution;
-}
-```
-
-|                                                   Evoltion Diagram                                                   |
-| :------------------------------------------------------------------------------------------------------------------: |
-| ![revolution](https://user-images.githubusercontent.com/23366804/214083016-2827bac2-8f5a-4d4f-8ce9-d1d62b505882.png) |
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
