@@ -13,8 +13,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 In the project directory, you can run:
 
 ## Initialize Project - downloading dependecies
+
 ```
 npm install
+```
+
+> I have been using Live Sass Compiler inorder to generate to css (Install this extension) and then `Watch sass`
+
+```
 npm start
 ```
 
