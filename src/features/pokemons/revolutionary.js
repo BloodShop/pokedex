@@ -8,7 +8,7 @@ export default function revolutionary(pokemonList) {
                 return pokemonsCopy[pokeIndex];
             }
             return { ...e, devolution: pokemonsCopy[i] };
-        })
+        });
     }
 
     const filteredPokes = pokemonsCopy.filter(p => !p.devolution);
@@ -26,7 +26,5 @@ export default function revolutionary(pokemonList) {
         evolution.push(tempChain);
     }
 
-    console.log('!!', evolution);
-
-    return evolution
+    return evolution;
 }

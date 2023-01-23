@@ -5,7 +5,7 @@ import PokemonItem from "../components/PokemonItem";
 import Sidebar from "../components/Sidebar";
 import Spinner from "../components/Spinner";
 import { getPokemons, reset } from "../features/pokemons/pokedexSlice";
-import pokemonEvolutionary from "../features/pokemons/pokemonDic";
+import revolutionary from "../features/pokemons/revolutionary";
 import pokemonTypes from "../features/pokemons/pokemonTypes";
 
 export default function Pokedex() {
@@ -31,14 +31,23 @@ export default function Pokedex() {
                 state: {
                     pokemon: selectedPokemon,
                     evolutionChain: pokemonGraphEvolution.find((ev) =>
-                        ev.some((obj) => obj.hasOwnProperty(selectedPokemon.id))
+                        ev.some((obj) => {
+                            debugger;
+                            if (obj.id) {
+                                return obj.id === selectedPokemon.id;
+                            } else {
+                                obj.some((nestedEv) =>
+                                    nestedEv.hasOwnProperty(selectedPokemon.id)
+                                );
+                            }
+                        })
                     ),
                 },
             });
         }
 
         dispatch(getPokemons()).then((res) => {
-            setPokemonGraphEvolution(pokemonEvolutionary(res.payload));
+            setPokemonGraphEvolution(revolutionary(res.payload));
         });
 
         return () => {

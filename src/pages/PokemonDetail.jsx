@@ -26,6 +26,7 @@ export default function PokemonDetail() {
                 setPokemon(res.payload)
             );
         }
+        console.log(state.evolutionChain);
         setEvolutionChain(state.evolutionChain);
     }, [state, dispatch, navigate]);
 
