@@ -28,14 +28,11 @@ export default function PokemonDetail() {
         }
 
         setEvolutionChain(state?.evolutionChain);
-    }, [state]);
+    }, [state, params]);
 
     if (!pokemon) {
         return <Spinner />;
-    } else if (
-        pokemon === `Pokemon ${params.id} not found` ||
-        pokemon instanceof String
-    ) {
+    } else if (typeof pokemon === "string") {
         return <NoMatch error={pokemon} />;
     }
 

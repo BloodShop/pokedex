@@ -58,6 +58,7 @@
             }
 
             .lvl {
+                max-height: $evolution-circle-radius * 8;
                 display: flex;
                 flex-direction: column;
                 flex-wrap: wrap;
