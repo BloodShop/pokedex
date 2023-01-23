@@ -1,0 +1,32 @@
+.sidebar {
+    padding: ($header-height + 20px) 20px 0 20px;
+    height: 100vh;
+    width: $sidebar-width;
+    float: left;
+    background-color: #f2f2f2;
+    position: fixed;
+    overflow-y: scroll;
+    .sidebar__content {
+        label {
+            display: block;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .sidebar__content__type {
+            margin-bottom: 10px;
+            label {
+                display: block;
+                font-size: 18px;
+                input[type="checkbox"] {
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+}

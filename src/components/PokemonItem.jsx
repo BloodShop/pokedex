@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/styles.css";
+import "../dist/css/styles.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function PokemonItem({ pokemon, onClick }) {

@@ -13,7 +13,7 @@ import NoMatch from "./NoMatch";
 /* Pokedex inventory */
 export default function Pokedex() {
     const dispatch = useDispatch(),
-        { isLoading, isError, message, pokemons } = useSelector(
+        { pokemons, isLoading, isError, message } = useSelector(
             (state) => state.pokedex
         ),
         [query, setQuery] = useState(""),

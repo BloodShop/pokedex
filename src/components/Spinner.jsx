@@ -1,4 +1,4 @@
-import "../css/styles.css";
+import "../dist/css/styles.css";
 
 export default function Spinner() {
     return (
