@@ -7,7 +7,7 @@ import Spinner from "../components/Spinner";
 import { getPokemons, reset } from "../features/pokemons/pokedexSlice";
 import revolutionary from "../features/pokemons/revolutionary";
 import pokemonTypes from "../features/pokemons/pokemonTypes";
-import filterPokemons from "../features/pokemons/filterPokemons";
+import pokemonFilter from "../features/pokemons/pokemonFilter";
 
 export default function Pokedex() {
     const dispatch = useDispatch(),
@@ -72,15 +72,13 @@ export default function Pokedex() {
                 <Sidebar onTypeCheck={handleTypeChange} setQuery={setQuery} />
                 <div className={"card-container"}>
                     {pokemons.length > 0 ? (
-                        filterPokemons(pokemons, types, query).map(
-                            (pokemon) => (
-                                <PokemonItem
-                                    onClick={() => setSelectedPokemon(pokemon)}
-                                    key={pokemon.id}
-                                    pokemon={pokemon}
-                                />
-                            )
-                        )
+                        pokemonFilter(pokemons, types, query).map((pokemon) => (
+                            <PokemonItem
+                                onClick={() => setSelectedPokemon(pokemon)}
+                                key={pokemon.id}
+                                pokemon={pokemon}
+                            />
+                        ))
                     ) : (
                         <h3>You have no pokemons</h3>
                     )}

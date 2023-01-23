@@ -1,5 +1,5 @@
 
-export default function filterPokemons(pokemons, types, query) {
+export default function pokemonFilter(pokemons, types, query) {
     const filterByQuery = (pokes) => {
         return pokes.filter((pokemon) =>
             query === ""
