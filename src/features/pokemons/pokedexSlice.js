@@ -60,6 +60,7 @@ export const pokedexSlice = createSlice({
     },
     extraReducers: (builder) => {
       builder
+        /* Get Pokemons cases */
         .addCase(getPokemons.pending, (state) => {
           state.isLoading = true
         })
@@ -73,6 +74,7 @@ export const pokedexSlice = createSlice({
           state.isError = true
           state.message = action.payload
         })
+        /* Get Pokemon By Id cases */
         .addCase(getPokemonById.pending, (state) => {
           if(!state.isLoading)
             state.isLoading = true

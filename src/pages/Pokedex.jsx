@@ -8,7 +8,9 @@ import { getPokemons, reset } from "../features/pokemons/pokedexSlice";
 import revolutionary from "../features/pokemons/revolutionary";
 import pokemonTypes from "../features/pokemons/pokemonTypes";
 import pokemonFilter from "../features/pokemons/pokemonFilter";
+import NoMatch from "./NoMatch";
 
+/* Pokedex inventory */
 export default function Pokedex() {
     const dispatch = useDispatch(),
         { isLoading, isError, message, pokemons } = useSelector(
@@ -62,11 +64,11 @@ export default function Pokedex() {
         });
     };
 
-    if (isLoading) {
-        return <Spinner />;
-    }
-
-    return (
+    return isLoading ? (
+        <Spinner />
+    ) : isError ? (
+        <NoMatch />
+    ) : (
         <>
             <div className="main__intro">
                 <Sidebar onTypeCheck={handleTypeChange} setQuery={setQuery} />

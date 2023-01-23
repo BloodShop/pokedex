@@ -8,6 +8,7 @@ import { getPokemonById } from "../features/pokemons/pokedexSlice";
 import NoMatch from "./NoMatch";
 import EvolutionChain from "../components/EvolutionChain";
 
+/* Single Pokemon detail page */
 export default function PokemonDetail() {
     const { state } = useLocation(),
         params = useParams(),
