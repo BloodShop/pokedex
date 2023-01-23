@@ -34,11 +34,10 @@ export default function Pokedex() {
                         ev.some((obj) => {
                             if (obj.id) {
                                 return obj.id === selectedPokemon.id;
-                            } else {
-                                obj.some((nestedEv) =>
-                                    nestedEv.hasOwnProperty(selectedPokemon.id)
-                                );
                             }
+                            return obj.some(
+                                (nestedEv) => nestedEv.id === selectedPokemon.id
+                            );
                         })
                     ),
                 },

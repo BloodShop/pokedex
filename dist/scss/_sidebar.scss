@@ -5,6 +5,7 @@
     float: left;
     background-color: #f2f2f2;
     position: fixed;
+    overflow-y: scroll;
     .sidebar__content {
         label {
             display: block;

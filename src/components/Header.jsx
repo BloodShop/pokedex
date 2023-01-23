@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { BiMenuAltRight } from "react-icons/bi";
 import { AiOutlineCloseSquare } from "react-icons/ai";
@@ -14,37 +14,18 @@ export default function Header() {
         <div className={"header"}>
             <div className={"header__content"}>
                 <div>
-                    <span className={"logo"}>Pokédex</span>
+                    <a
+                        className={"logo"}
+                        onClick={(e) =>
+                            location.pathname === "/" && e.preventDefault()
+                        }
+                        href={"/"}
+                    >
+                        Pokédex
+                    </a>
                 </div>
                 <div>
                     <nav className={`nav ${menuOpen ? "nav--open" : {}}`}>
-                        <a
-                            className={`nav__item ${
-                                location.pathname === "/"
-                                    ? "nav__item--disabled"
-                                    : ""
-                            }`}
-                            onClick={(e) =>
-                                location.pathname === "/" && e.preventDefault()
-                            }
-                            href={"/"}
-                        >
-                            Inventory
-                        </a>
-                        <a
-                            className={`nav__item ${
-                                location.pathname === "/about"
-                                    ? "nav__item--disabled"
-                                    : ""
-                            }`}
-                            onClick={(e) =>
-                                location.pathname === "/about" &&
-                                e.preventDefault()
-                            }
-                            href={"about"}
-                        >
-                            Lazy About
-                        </a>
                         <div className={"nav__button__container"}>
                             <Clock />
                         </div>

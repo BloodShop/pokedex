@@ -1,6 +1,13 @@
 .pokemon-detail {
     padding-top: $header-height;
     text-align: center;
+
+    h3 {
+        font-size: 24px;
+        color: $header-font-color;
+        margin: 10px;
+    }
+
     &__item {
         margin: 25px 25px;
     }
@@ -25,11 +32,6 @@
         margin: auto;
     }
     &__types {
-        h3 {
-            font-size: 24px;
-            color: $header-font-color;
-            margin: 10px;
-        }
         ul {
             list-style: none;
             margin: 0;
@@ -44,50 +46,40 @@
             }
         }
     }
-    &__evolutions {
-        h3 {
-            font-size: 24px;
-            color: $header-font-color;
-            margin: 10px;
-        }
-        ul {
-            list-style: none;
+    &__chain-container {
+        padding-top: $header-height;
+        text-align: center;
+        &__wrapper {
             display: flex;
+            align-items: center;
             justify-content: center;
-            flex-wrap: wrap;
-            margin: 0;
-            padding: 0;
-
-            li {
-                font-size: 18px;
-                color: $header-font-color;
-                margin: 10px 10px;
-                display: inline-block;
-                padding-top: 20px;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                overflow:hidden;
-
-                span {
-                    display: flex;
-                    text-align: center;
-                }
+            span {
+                margin: auto 10px;
             }
-            .circle {
-                @extend li;
-                border: 2px solid black;
-                font-size: 18px;
-                background-color: $primary;
-                height: $evolution-circle-radius * 2;
-                border-radius: 50%;
-                width: $evolution-circle-radius * 2;
-                font-weight: 700;
-                cursor: pointer;
-                &__current {
-                    @extend .circle;
-                    border: 3px solid red;
-                    pointer-events: none;
+
+            .lvl {
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                .circle {
+                    margin: 10px;
+                    border: 1px solid black;
+                    display: flex;
+                    background-color: $primary;
+                    border-radius: 50%;
+                    font-weight: 700;
+                    height: 100px;
+                    width: 100px;
+                    cursor: pointer;
+                    &__current {
+                        @extend .circle;
+                        border: 3px solid red;
+                        pointer-events: none;
+                    }
+                    >.content {
+                        text-align: center;
+                        margin: auto;
+                    }
                 }
             }
         }

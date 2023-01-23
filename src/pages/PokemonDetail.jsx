@@ -6,11 +6,11 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { getPokemonById } from "../features/pokemons/pokedexSlice";
 import NoMatch from "./NoMatch";
+import EvolutionChain from "../components/EvolutionChain";
 
 export default function PokemonDetail() {
     const { state } = useLocation(),
         params = useParams(),
-        location = useLocation(),
         navigate = useNavigate(),
         dispatch = useDispatch(),
         [pokemon, setPokemon] = useState(),
@@ -18,7 +18,7 @@ export default function PokemonDetail() {
 
     useEffect(() => {
         if (!state) {
-            navigate(-1);
+            navigate("/", { replace: true });
         } else if (state.pokemon) {
             setPokemon(state.pokemon);
         } else {
@@ -26,15 +26,14 @@ export default function PokemonDetail() {
                 setPokemon(res.payload)
             );
         }
-        console.log(state.evolutionChain);
-        setEvolutionChain(state.evolutionChain);
-    }, [state, dispatch, navigate]);
+
+        setEvolutionChain(state?.evolutionChain);
+    }, [state]);
 
     if (!pokemon) {
         return <Spinner />;
     } else if (
         pokemon === `Pokemon ${params.id} not found` ||
-        typeof pokemon === "string" ||
         pokemon instanceof String
     ) {
         return <NoMatch error={pokemon} />;
@@ -61,50 +60,9 @@ export default function PokemonDetail() {
                         ))}
                     </ul>
                 </div>
-                <div className="pokemon-detail__evolutions">
+                <div className="pokemon-detail__chain-container">
                     <h3>Evolutions:</h3>
-                    <ul>
-                        {evolutionChain &&
-                            evolutionChain.map((evolution, index) => {
-                                if (Array.isArray(evolution)) {
-                                    return;
-                                }
-
-                                return (
-                                    <div key={evolution.id}>
-                                        {index !== 0 && (
-                                            <li>
-                                                <span>&#8594;</span>
-                                            </li>
-                                        )}
-                                        <li
-                                            onClick={(e) => {
-                                                location.pathname ===
-                                                `/${evolution.id}`
-                                                    ? e.preventDefault()
-                                                    : navigate(
-                                                          `/${evolution.id}`,
-                                                          {
-                                                              state: {
-                                                                  evolutionChain:
-                                                                      state.evolutionChain,
-                                                              },
-                                                          }
-                                                      );
-                                            }}
-                                            className={`circle${
-                                                evolution.id === pokemon.id
-                                                    ? "__current"
-                                                    : ""
-                                            }`}
-                                        >
-                                            <div>{evolution.name}</div>
-                                            <div>{index}</div>
-                                        </li>
-                                    </div>
-                                );
-                            })}
-                    </ul>
+                    <EvolutionChain chain={evolutionChain} pokemon={pokemon} />
                 </div>
             </div>
         </div>
