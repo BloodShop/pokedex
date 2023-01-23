@@ -29,32 +29,38 @@ npm start
 const pokemonTypes = ['grass','fire','flying','water','bug','normal','electric','ground','fairy','fighting','psychic','rock','steel','ice','ghost','dragon']
 ```
 
-### *src/pages/Pokedex.jsx*
+### *src/features/pokemons/pokemonFilter.js*
 
 ```javascript
-/* Types declaration */
-[types, setTypes] = useState(pokemonTypes.reduce((acc, type) => ({ ...acc, [type]: false }), {}))
+/* Pokemons, types & query declarations on Pokedex.jsx */
+const { pokemons, isLoading, isError, message } = useSelector((state) => state.pokedex)
+const [types, setTypes] = useState(pokemonTypes.reduce((acc, type) => ({ ...acc, [type]: false }), {}))
+const [query, setQuery] = useState('')
 
    ...
 
-const filterByQuery = (pokes) => {
-    return pokes.filter((pokemon) =>
-        query === ""
-            ? pokemon
-            : pokemon.name.toLowerCase().includes(query.toLowerCase())
-    );
-};
+export default function pokemonFilter(pokemons, types, query) {
+    const filterByQuery = (pokes) => {
+        return pokes.filter((pokemon) =>
+            query === ""
+                ? pokemon
+                : pokemon.name.toLowerCase().includes(query.toLowerCase())
+        );
+    };
 
-const filterByType = (pokes) => {
-    const checkedTypes = Object.entries(types)
-        .filter((type) => type[1])
-        .map((type) => type[0]);
-    return checkedTypes.length > 0
-        ? pokes.filter(({ types }) =>
-              types.some((t) => checkedTypes.includes(t))
-          )
-        : pokes;
-};
+    const filterByType = (pokes) => {
+        const checkedTypes = Object.entries(types)
+            .filter((type) => type[1])
+            .map((type) => type[0]);
+        return checkedTypes.length > 0
+            ? pokes.filter(({ types }) =>
+                  types.some((t) => checkedTypes.includes(t))
+              )
+            : pokes;
+    };
+
+    return filterByType(filterByQuery(pokemons));
+}
 ```
 
 ## Pokemon Evolution
