@@ -7,6 +7,7 @@ import Spinner from "../components/Spinner";
 import { getPokemons, reset } from "../features/pokemons/pokedexSlice";
 import revolutionary from "../features/pokemons/revolutionary";
 import pokemonTypes from "../features/pokemons/pokemonTypes";
+import filterPokemons from "../features/pokemons/filterPokemons";
 
 export default function Pokedex() {
     const dispatch = useDispatch(),
@@ -61,25 +62,6 @@ export default function Pokedex() {
         });
     };
 
-    const filterByQuery = (pokes) => {
-        return pokes.filter((pokemon) =>
-            query === ""
-                ? pokemon
-                : pokemon.name.toLowerCase().includes(query.toLowerCase())
-        );
-    };
-
-    const filterByType = (pokes) => {
-        const checkedTypes = Object.entries(types)
-            .filter((type) => type[1])
-            .map((type) => type[0]);
-        return checkedTypes.length > 0
-            ? pokes.filter(({ types }) =>
-                  types.some((t) => checkedTypes.includes(t))
-              )
-            : pokes;
-    };
-
     if (isLoading) {
         return <Spinner />;
     }
@@ -90,13 +72,15 @@ export default function Pokedex() {
                 <Sidebar onTypeCheck={handleTypeChange} setQuery={setQuery} />
                 <div className={"card-container"}>
                     {pokemons.length > 0 ? (
-                        filterByType(filterByQuery(pokemons)).map((pokemon) => (
-                            <PokemonItem
-                                onClick={() => setSelectedPokemon(pokemon)}
-                                key={pokemon.id}
-                                pokemon={pokemon}
-                            />
-                        ))
+                        filterPokemons(pokemons, types, query).map(
+                            (pokemon) => (
+                                <PokemonItem
+                                    onClick={() => setSelectedPokemon(pokemon)}
+                                    key={pokemon.id}
+                                    pokemon={pokemon}
+                                />
+                            )
+                        )
                     ) : (
                         <h3>You have no pokemons</h3>
                     )}
