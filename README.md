@@ -80,4 +80,41 @@ Evoltion Diagram |
 ![revolution](https://user-images.githubusercontent.com/23366804/214083016-2827bac2-8f5a-4d4f-8ce9-d1d62b505882.png) |
 
 
+## Sass 7-1 Architecture Pattern
+
+```
+sass/
+|
+|– abstracts/
+|   |– _variables.scss       # Sass Variables
+|   |– _mixins.scss          # Sass Mixins
+|
+|– vendors/
+|   |– 
+|
+|– base/
+|   |– _utilities.scss
+|
+|– layout/
+|   |– _navigation.scss      # Navigation
+|   |– _grid.scss            # Grid system
+|   |– _header.scss          # Header
+|   |– _footer.scss          # Footer
+|   |– _sidebar.scss         # Sidebar
+|   |– _forms.scss           # Forms
+|
+|– components/
+|   |– _loader.scss          # Loading spinner
+|   |– _pokemonItem.scss     # Pokmon card
+|
+|– pages/
+|   |– _noMatch.scss         # Error page
+|   |– _pokemonDetails.scss  # Contact specific styles
+|
+|– themes/
+|   |– 
+|
+ – main.scss                 # Main Sass input file
+```
+
 To learn React, check out the [React documentation](https://reactjs.org/).
