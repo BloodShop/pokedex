@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { BiMenuAltRight } from "react-icons/bi";
 import { AiOutlineCloseSquare } from "react-icons/ai";
 import Clock from "./Clock";
-import "../dist/css/styles.css";
+import "../styles/css/main.css";
 
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false),

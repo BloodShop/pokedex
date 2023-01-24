@@ -1,4 +1,5 @@
-@import "config";
+@import "./abstract/variables";
+@import "./abstract/mixin";
 
 *,
 *::before,
@@ -42,7 +43,6 @@ main {
 }
 
 button {
-    // reset to default
     font-family: inherit;
     outline: none;
     border: none;
@@ -54,10 +54,10 @@ button {
     padding: 0;
 }
 
-@import 'header';
-@import 'utilities';
-@import 'sidebar';
-@import 'loader';
-@import 'pokemonItem';
-@import 'pokemonDetails';
-@import 'noMatch';
+@import './base/utilities';
+@import './layout/header';
+@import './layout/sidebar';
+@import './components/loader';
+@import './components/pokemonItem';
+@import './pages/pokemonDetails';
+@import './pages/noMatch';

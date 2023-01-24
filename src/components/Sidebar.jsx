@@ -1,5 +1,5 @@
 import React from "react";
-import "../dist/css/styles.css";
+import "../styles/css/main.css";
 import pokemonTypes from "../features/pokemons/pokemonTypes";
 
 export default function Sidebar({ onTypeCheck, setQuery }) {

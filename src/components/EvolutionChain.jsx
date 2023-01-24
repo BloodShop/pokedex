@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "../dist/css/styles.css";
+import "../styles/css/main.css";
 import EvolutionItem from "./EvolutionItem";
 
 export default function EvolutionChain({ chain, pokemon }) {
