@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-/**/dist/**
+**/styles/css
 /.pnp
 .pnp.js
 
