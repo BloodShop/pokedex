@@ -109,7 +109,7 @@ sass/
 |
 |– pages/
 |   |– _noMatch.scss         # Error page
-|   |– _pokemonDetails.scss  # Contact specific styles
+|   |– _pokemonDetails.scss  # Pokemon details page
 |
 |– themes/
 |   |– 
